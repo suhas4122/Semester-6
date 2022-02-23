@@ -1,0 +1,54 @@
+﻿18CS10048 Sahil Jindal, 18CS30009 Ashutosh Varshney
+
+
+OS Lab Assignment 5
+
+
+Data Structures used:
+
+
+1) In both Part 1 and Part 2 both, we have maintained a priority queue of jobs (jobqueue) having a fixed maximum size, which stores the jobs sorted on the basis of their priority value and used functions heapifyup() and heapifydown() for adding/removing jobs from the queue. 
+
+2) In Part1, we have created a structure for shared memory which has the following variables: job_created, job_completed, num_of_jobs, mutex, jobqueue, runningjobs whereas in Part 2 we don’t have any such struct separately as the global variables are already shared among all the threads.
+
+
+3) In Part 2 we are creating an array for producer and consumer threads unlike Part 1 where we are simply using the fork() system call.
+
+
+Functions used:
+
+
+1) In both Part 1 and Part 2 we have defined functions insert_job() to insert a new job into the priority queue and retrieve_job() to pop a job out of the priority queue.
+
+
+2) Unlike Part 1, in Part 2 we have defined separate functions consumer() and producer() which are being passed in pthread_create(). This was not the case in Part 1 where we simply ran a for loop.
+
+
+3) Used shmget to create shared memory in Part 1 whereas in Part 2 shared memory is teh global values declared. Used shmdt, shmctl for closing shared memory. 
+
+
+4) Used pthread_join for ensuring all the threads are closed before proceeding further. 
+
+
+Algorithms used:
+
+
+We have used mutex locks for accessing any variable of the shared memory to prevent race conditions and synchronise the processes/ threads.
+
+
+In both the parts the following sequence is done: 
+
+
+1) A producer creates a job and we increment jobs_created for each successful insertion in the queue. This variable needs to be synchronized and thus is updated in mutex locks.
+
+
+2) Consumer retrieves a job from the queue and a space is freed in the queue. But till the consumer completes this job, another producer cannot use this empty space. So we have used the runningjobs variable to solve this problem. So after retrieving a job, the consumer sleeps for compute_time after which it increments the jobs_completed.
+
+
+3) Producer creates processes till the sum of numberofjobs in queue and runningjobs is less than queue size. 
+
+
+4) All the consumers and producers end their task whenever jobs_completed >=total_jobs. 
+
+
+5) We output the time spent since we started creating producers and consumers.

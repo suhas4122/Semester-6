@@ -1,0 +1,29 @@
+Run 2A on ubuntu 20 python3
+Run 2B on conda 4.9.2 Windows 
+
+
+
+//FOR 2A
+NEED TO GIVE PATH TO queries_10.txt AS THIRD ARGUMENT
+import sys
+import os
+import re
+import pickle
+from collections import Counter
+from tqdm import tqdm
+from math import log,sqrt
+from statistics import mean
+import csv
+
+
+//FOR 2B
+import sys
+import os
+import re
+import pickle
+from collections import Counter
+from math import log,sqrt
+from statistics import mean
+import csv
+import xlrd
+

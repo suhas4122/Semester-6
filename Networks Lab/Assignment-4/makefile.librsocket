@@ -1,0 +1,10 @@
+CC = gcc
+CFLAGS = -Wall -Wextra -std=c99
+AR = ar
+
+librsocket.a: rsocket.c rsocket.h
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) rsocket.c
+	$(AR) -rcs librsocket.a rsocket.o
+
+clean:
+	rm -f librsocket.a rsocket.o
